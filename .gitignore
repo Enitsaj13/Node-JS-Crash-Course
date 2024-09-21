@@ -1,2 +1,69 @@
-node_modules
+# Node modules directory
+node_modules/
+
+# Build output directories
+build/
+dist/
+
+# Cache directories
+.cache/
+.pnp
+.pnp.js
+
+# Environment variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency files
+package-lock.json
+yarn.lock
+
+# Coverage reports
+coverage/
+
+# IDE/editor-specific directories
+.vscode/
+.idea/
+
+# Generated files
+.DS_Store           # macOS file system
+Thumbs.db           # Windows file system
+
+# React testing snapshots
+*.snap
+
+# ESLint cache (if using ESLint)
+.eslintcache
+
+# Temporary files
+*.tmp
+*.temp
+
+# Miscellaneous
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Typescript build info file
+*.tsbuildinfo
+
+# Storybook files
+storybook-static/
+
+# SASS cache (if using SASS)
+.sass-cache/
+
+# Tailwind CSS cache (if using Tailwind CSS)
+.tailwindcache/
+
+# Parcel-bundler cache (if using Parcel)
+.cache/

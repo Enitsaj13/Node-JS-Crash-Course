@@ -5,25 +5,28 @@ import path from 'path';
 const PORT = process.env.PORT;
 
 // get current path
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = url.fileURLToPath(import.meta.url); // access file name
+const __dirname = path.dirname(__filename); // access dir name
 
 console.log(__filename, __dirname);
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
     try {
         // check if GET request
         if (req.method === 'GET') {
+            let filePath;
             if (req.url === '/') {
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end('<h1>Homepage!</h1>'); // need for this unlike express
+                filePath = path.join(__dirname, 'public', 'index.html');
             } else if (req.url === '/about') {
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end('<h1>About!</h1>');
+                filePath = path.join(__dirname, 'public', 'about.html');
             } else {
-                res.writeHead(400, { 'Content-Type': 'text/html' });
-                res.end('<h1>Not Found!</h1>');
+                throw new Error('Not Found!')
             }
+
+            const data = await fs.readFile(filePath);
+            res.setHeader('Content-Type', 'text/html');
+            res.write(data);
+            res.end();
         } else {
             throw new Error('Method not allowed!')
         }
@@ -31,8 +34,6 @@ const server = http.createServer((req, res) => {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('<h1>Server Error!</h1>');
     }
-    // res.setHeader('Content-Type', 'text/html');
-    // res.statusCode = 400;
 });
 
 server.listen(PORT, () => {
